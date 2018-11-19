@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="pwabuilder-sw-register.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Huset kbh. Mobil</title>
+
+    <link rel="manifest" href="manifest.json">
+    <link href="appStyles.css" rel="stylesheet" type="text/css">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="start_url" content="/huset/mobil">
+    <meta name="apple-mobile-web-app-title" content="HUSET KBH">
+    <link rel="apple-touch-icon" sizes="192x192" href="appicon/Watch/Icon-172.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="appicon/iOS/Icon-1024.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+    <style>
+        .subcat {
+            display: none;
+        }
+
+    </style>
+</head>
+
+<a href="#https://www.flickr.com/photos/135006755@N04/" class="fa fa-flickr"></a>
+<a href="#https://www.facebook.com/Huset.Koebenhavn" class="fa fa-facebook"></a>
+<a href="#https://twitter.com/HusetKBH" class="fa fa-twitter"></a>
+<a href="#https://www.instagram.com/husetkbh/" class="fa fa-instagram"></a>
+
+<body>
+    <div class="maincontainer">
+        <header>
+            <div class="logo">
+                <img src="Artboard%202,3.png">
+
+            </div>
+
+
+            <!--gå til top knap-->
+            <button onclick="topFunction()" id="myBtn" title="Go to top">&uarr;</button>
+            <div class="container" onclick="myFunction(this)">
+                <div class="bar1"></div>
+                <div class="bar2"></div>
+                <div class="bar3"></div>
+            </div>
+            <!--knapper/menu til filtrering -->
+            <div class="menu">
+                <button id="filterall">Events</button>
+                <button id="filtermusik">Musik</button>
+                <button id="filterfilm">Film</button>
+                <a href="#filterkontakt"><button>Kontakt</button></a>
+                <a href="#filteraabningstider"><button>Åbningstider</button></a>
+
+                <div class="subcat">
+                    <button id="jazz">Jazz</button>
+                    <button id="rock">Rock</button>
+                    <button id="alt">Alt</button>
+                    <button id="folk">Folk</button>
+                    <button id="pop">Pop</button>
+                </div>
+
+            </div>
+        </header>
+
+        <br>
+        <p>I Huset finder du en masse kulturoplevelser, krøllede ideer og kreative ildsjæle. Med intet mindre end 5 scener, en biograf, et teater, øvelokaler, madbod, arkadespil, en brætspilscafé – og mere end tyve foreninger og klubber – sker der rigtig meget! Huset er faktisk et af Danmarks ældste kulturhuse! Det har ligget i Magstræde midt i København siden 1970, hvor det blev besat af en gruppe hippier og kunstnere.</p>
+        <h1>Husets events</h1>
+        <article id="eventscontainer"></article>
+    </div>
+
+    <!--template: info om eventet bliver hentet fra json-->
+    <template id="event-template">
+    <section class="event">
+        <h2 class="data-titel"></h2>
+        <a href="" class="linktosingle">
+            <img class="data-img" src="">
+        </a>
+        <span class="data-genre"></span><br>
+        <span class="data-dato"></span><br>
+        <span class="data-tid"></span> <br>
+        <span class="data-sted"></span> <br>
+        <span class="data-pris"></span> <br>
+    </section>
+
+</template>
+
+    <section id="filterkontakt">
+
+        <h1>Kontakt </h1>
+        <p>
+            Kontakt HUSET-KBH.
+            <br> Du kan finde os på Rådhusstræde 13. 1466 København K. <br> Du kan også ringe til os på Tlf: <a href="tel:21 51 21 51 ">21 51 21 51 </a> eller kigge forbi <a href="info@huset-kbh.dk">vores hjemmeside</a>.
+            <br> Du kan også komme forbi os! <br>Husets reception har åbent for henvendelser i hverdage ml. 11.00-15. <br>Vi ses i HUSET!
+
+
+
+
+        </p>
+
+    </section>
+    <section id="filteraabningstider">
+
+
+        <h1> Åbningstider</h1>
+        <p>
+            Huset-KBH har varierende åbningstider. Se åbningstider for de enkelte events i kalenderen
+
+        </p>
+
+        <h2> Åbningstider for Husets Reception</h2>
+        Husets reception har åbent for henvendelser i hverdage ml. 11.00-15.00. <br>Husets reception har åbent for henvendelser i hverdage ml. 11.00-15.00.
+
+        <br>
+
+        <h2>Bastard Café</h2>
+        <p>
+            Mandag-torsdag: 12.00-00.00 Fredag-lørdag: 12.00-02.00 Søndag: 12.00-00.00
+            <br> </p>
+
+        <h2> Spisehuset Fair </h2>
+        <p> Tirsdag-lørdag: 17.00-22.00 </p>
+
+    </section>
+
+
+    <!-- spørg en lærer fredag  (martins link) henter json -->
+    <script>
+        let minTemplate = document.querySelector("#event-template");
+        let templateModtager = document.querySelector("#eventscontainer");
+        async function getJson() {
+            let eventObjekt = await fetch("https://e17.mabe-kea.dk/wp-json/wp/v2/events?per_page=50");
+            let events = await eventObjekt.json();
+            let mitValg;
+            //find events der indeholder de valgte kategorier
+            let musik = events.filter(function(e) {
+                return e.categories.includes(17);
+            });
+            let film = events.filter(function(e) {
+                return e.categories.includes(19)
+            });
+
+            //filtrér. Viser valgte. Viser den genre man trykker på (button)
+            function valgte(vc, genre) {
+                mitValg = events.filter(function(e) {
+                    return e.categories.includes(vc);
+
+                });
+                console.log(mitValg, genre);
+                visValgte(mitValg, genre);
+            }
+
+
+            visValgte(events);
+
+            document.querySelector('#filtermusik').addEventListener("click", function(e) {
+                visValgte(musik, "musik");
+                //console.log("target",e.target.id);
+            });
+            document.querySelector('#filterfilm').addEventListener("click", function() {
+                visValgte(film, "film");
+            });
+            document.querySelector('#filterall').addEventListener("click", function() {
+                visValgte(events, "all");
+            });
+            document.querySelector('#jazz').addEventListener("click", function() {
+                valgte(21, "musik");
+            });
+            document.querySelector('#rock').addEventListener("click", function() {
+                valgte(20, "musik");
+            });
+            document.querySelector('#alt').addEventListener("click", function() {
+                valgte(24, "musik");
+            });
+            document.querySelector('#folk').addEventListener("click", function() {
+                valgte(23, "musik");
+            });
+            document.querySelector('#pop').addEventListener("click", function() {
+                valgte(22, "musik");
+            });
+
+        }
+        //viser valgte i musik. Viser bestemt event
+
+        function visValgte(evt, cat) {
+            templateModtager.innerHTML = "";
+
+            if (cat == "musik") {
+                document.querySelector(".subcat").style.display = "block";
+            } else {
+                document.querySelector(".subcat").style.display = "none";
+            }
+            // console.log(cat);
+
+            evt.forEach(function(event) {
+
+                let klon = minTemplate.cloneNode(true).content;
+                klon.querySelector("section").classList.add(event.acf.genre);
+                klon.querySelector(".data-titel").textContent = event.acf.titel;
+                klon.querySelector(".data-genre").textContent = event.acf.genre;
+                klon.querySelector(".data-img").setAttribute("src", event.acf.billede);
+                klon.querySelector(".data-dato").textContent = "dato: " + event.acf.dato;
+                klon.querySelector(".data-tid").textContent = "dørene åbner kl.: " + event.acf.starttid;
+                klon.querySelector(".data-sted").textContent = event.acf.sal;
+                klon.querySelector(".data-pris").textContent = "entre: " + event.acf.billetpris + "kr";
+                klon.querySelector(".linktosingle").setAttribute("href", "singleevent.html?id=" + event.id);
+                templateModtager.appendChild(klon);
+            });
+
+        }
+
+
+        //læs script når DOM er hentet
+        document.addEventListener("DOMContentLoaded", getJson);
+        window.onscroll = function() {
+            scrollFunction()
+        };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                document.getElementById("myBtn").style.display = "block";
+            } else {
+                document.getElementById("myBtn").style.display = "none";
+            }
+        }
+
+        // Når brugere klikker på button, scroller sitet til top
+        function topFunction() {
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        }
+
+
+
+        function myFunction() {
+            var x = document.getElementById("myLinks");
+            if (x.style.display === "block") {
+                x.style.display = "none";
+            } else {
+                x.style.display = "block";
+            }
+        }
+        let open = false;
+
+        function myFunction(x) {
+            x.classList.toggle("change");
+            if (open) {
+                document.querySelector(".menu").style.display = "none";
+                open = false;
+            } else {
+                document.querySelector(".menu").style.display = "block";
+                open = true;
+            }
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>

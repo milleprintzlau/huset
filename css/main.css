@@ -1,0 +1,364 @@
+html {
+
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+
+
+body {
+
+    color: white;
+    width: 80%;
+    margin: 0 auto;
+    font-size: 1.2em;
+
+
+
+
+}
+
+.title {
+    font-family: Avenir;
+}
+
+
+img {
+    max-width: 100%;
+}
+
+
+main {
+    display: grid;
+    grid-gap: 6vw;
+}
+
+
+
+/* ==================================================
+   Typography
+================================================== */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0 0 20px 0;
+    color: #FFFFFF;
+    font-weight: 300;
+    font-family: Avenir;
+    line-height: 1.5em;
+}
+
+h1 {
+    font-size: 48px;
+}
+
+h2 {
+    font-size: 36px;
+}
+
+h3,
+h4 {
+    font-size: 24px;
+}
+
+
+
+p {
+    margin: 0 0 30px;
+    font-family: Avenir;
+    width: 95%;
+}
+
+a {
+    color: white;
+}
+
+/* ==================================================
+   Knapper
+================================================== */
+
+.udlejlingsknap {
+    padding: 5px 10px 5px 10px;
+    background-color: #D71734;
+    color: white;
+    border-radius: 8px;
+    border: none;
+    font-size: 20px;
+}
+
+.udlejlingsknap:hover {
+    background: #DE5E60;
+    color: #FFFFFF;
+}
+
+/* ==================================================
+   OM
+================================================== */
+
+@media screen and (min-width:1000px) {
+    .container1 {
+        grid-column: 1/2;
+        grid-row: 1/4;
+
+
+        padding: 4vw;
+        color: white;
+
+    }
+    .main {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(5, 1fr);
+        grid-gap: 20px;
+    }
+
+
+}
+
+.alignnone {
+    width: 100%;
+}
+
+
+.laes_mere {
+
+    padding: 20px 20px 20px 20px;
+    background-color: #D71734;
+    color: white;
+    border-radius: 8px;
+    border: none;
+    font-size: 20px;
+}
+
+.laes_mere:hover {
+    background: #DE5E60;
+    color: #FFFFFF;
+}
+
+
+.mere {
+    grid-column: 2/3;
+    grid-row: 7/8;
+    z-index: 2;
+}
+
+
+
+
+/* ==================================================
+   STEDER
+
+================================================== */
+
+@media screen and (min-width: 1000px) {
+
+    .container3 {
+        grid-column: 1/3;
+        grid-row: 4/5;
+        padding: 4vw;
+        color: white;
+
+
+
+
+    }
+
+    .eventListview {
+        text-shadow: 2px 2px grey;
+        display: grid;
+        grid-template-columns: 10px repeat (2 1fr) 10px;
+        grid-template-rows: 10px repeat (6, 1fr) 10px;
+    }
+
+    .title {
+        font-size: 2em;
+    }
+
+
+
+}
+
+
+/* ==================================================
+FRIVILLIG
+================================================== */
+
+@media screen and (min-width: 1000px) {
+
+    .container2 {
+
+        padding: 4vw;
+        color: white;
+        grid-column: 2/3;
+        grid-row: 1/3;
+
+
+
+
+
+    }
+
+
+
+}
+
+
+/* ==================================================
+  Newsletter
+================================================== */
+@media screen and (min-width: 1000px) {
+.nyhedsbrev {
+
+    color: white;
+    font-size: 1em;
+    height: 450px;
+
+         padding: 4vw;
+        color: white;
+        grid-column: 2/3;
+        grid-row: 2/3;
+
+
+    }
+
+}
+
+.nyhedsbrev h4 {
+    color: #D71734;
+    font-size: 4em;
+    text-align: center;
+}
+
+.nyhedsbrev p {
+    justify-content: center;
+    color: #D71734;
+    text-align: center;
+}
+
+.input-group-field {
+    padding: 20px 250px 20px 20px;
+    margin: 10 auto;
+    color: #D71734;
+    text-align: center;
+
+
+}
+
+.button {
+
+
+    padding: 20px 20px 20px 20px;
+    background-color: #D71734;
+    color: white;
+    border-radius: 8px;
+    border: none;
+    font-size: 20px;
+
+}
+
+.button:hover {
+    background: #DE5E60;
+    color: #FFFFFF;
+}
+
+.input-group {
+    margin-left: 50px;
+
+}
+
+
+
+/* ==================================================
+   Contact Section
+================================================== */
+
+.container {
+    border-radius: 5px;
+    padding: 20px;
+
+}
+
+
+#contact-form {
+    margin-bottom: 0;
+}
+
+#contact-form p {
+    margin-bottom: 1px;
+}
+
+.contact-subject {
+    column-count: 1;
+
+}
+
+#contact-form input,
+#contact-form textarea {
+
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+
+    background: white;
+    color: #FFFFFF;
+    font-size: 16px;
+    height: auto;
+    padding: 15px;
+    margin: 0;
+
+    resize: none;
+}
+
+#contact-form input {
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+#contact-form textarea {
+    width: 100%;
+    resize: vertical;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+#contact-form .submit {
+
+    padding: 20px 20px 20px 20px;
+    background-color: #D71734;
+    color: white;
+    border-radius: 8px;
+    border: none;
+    font-size: 20px;
+
+    -webkit-transition: background 0.1s linear 0s, color 0.1s linear 0s;
+    -moz-transition: background 0.1s linear 0s, color 0.1s linear 0s;
+    -o-transition: background 0.1s linear 0s, color 0.1s linear 0s;
+    -o-transition: background 0.1s linear 0s, color 0.1s linear 0s;
+    transition: background 0.1s linear 0s, color 0.1s linear 0s;
+}
+
+#contact-form .submit:hover {
+    background: #DE5E60;
+    color: #FFFFFF;
+}
+
+#response {
+    margin-top: 20px;
+    color: #FFFFFF;
+}
+
+
+

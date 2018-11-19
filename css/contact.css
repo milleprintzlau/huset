@@ -1,0 +1,14 @@
+@media screen and (min-width: 1000px) {
+
+    .kontakt {
+        border: 3px solid #005F29;
+        padding: 4vw;
+        color: white;
+
+
+        grid-column: 2/3;
+        grid-row: 2/3;
+
+
+
+    }

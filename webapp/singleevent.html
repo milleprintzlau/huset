@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Huset kbh. musikevents</title>
+
+    <link href="appStyles.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div class="maincontainer">
+    <header>
+		<div class="logo"><h1>DET SKER I HUSET KBH</h1></div>
+        <nav>
+                <a href="index.html"><<</a>
+
+            </nav>
+    </header>
+    <article id="">
+        <section class="event">
+            <h2 class="data-titel"></h2>
+            <a href="" class="linktosingle">
+                <img class="data-img" src="">
+            </a>
+            <p class="data-genre"></p>
+            <p class="data-dato"></p>
+            <p class="data-tid"></p>
+            <p class="data-sted"></p>
+            <p class="data-pris"></p>
+            <p class="data-indhold"></p>
+            <p class="data-video"></p>
+        </section>
+    </article>
+</div>
+<script>
+    //find url-variablen id:
+    let url=new URL(window.location.href);
+    let variabler=new URLSearchParams(url.search);
+    let id=variabler.get("id");
+    async function getJson() {
+        let eventObjekt = await fetch("https://e17.mabe-kea.dk/wp-json/wp/v2/events/"+id);
+        let event = await eventObjekt.json();
+        document.querySelector(".data-titel").textContent = event.acf.titel;
+        document.querySelector(".data-genre").textContent = event.acf.genre;
+        document.querySelector(".data-img").setAttribute("src", event.acf.billede);
+        document.querySelector(".data-dato").textContent = "dato: " + event.acf.dato;
+         document.querySelector(".data-tid").textContent = "dørene åbner kl.: " + event.acf.starttid;
+        document.querySelector(".data-sted").textContent =  event.acf.sal;
+        document.querySelector(".data-indhold").innerHTML =  event.acf.indhold;
+        if( event.acf.video != "undefined"){
+           document.querySelector(".data-video").innerHTML =  event.acf.video;
+        }
+        document.querySelector(".data-pris").textContent = "entre: " + event.acf.billetpris+"kr";
+    }
+    document.addEventListener("DOMContentLoaded",  getJson);
+</script>
+</body>
+</html>
